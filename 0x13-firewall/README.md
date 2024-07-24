@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 0x13. Firewall ALX task
+=======
+This is a 0x13. Firewall ALX task
+>>>>>>> a1281483aca006125c34385c91f56afc82452033
 
 0. Let’s install the ufw firewall and setup a few rules on web-01.
 
@@ -10,7 +14,11 @@ Configure ufw so that it blocks all incoming traffic, except the following TCP p
 443 (HTTPS SSL)
 80 (HTTP)
 Share the ufw commands that you used in your answer file
+<<<<<<< HEAD
 File: File: 0-block_all_incoming_traffic_but
+=======
+File: 0-block_all_incoming_traffic_but
+>>>>>>> a1281483aca006125c34385c91f56afc82452033
 
 1. Firewalls can not only filter requests, they can also forward them.
 
