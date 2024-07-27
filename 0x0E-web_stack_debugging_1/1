@@ -1,1 +1,27 @@
-bash: ./0-nginx_likes_port_80: Permission denied
+Hit:1 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Hit:5 http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu focal InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (7.68.0-1ubuntu2.22).
+The following package was automatically installed and is no longer required:
+  libreadline5
+Use 'apt autoremove' to remove it.
+0 upgraded, 0 newly installed, 0 to remove and 256 not upgraded.
+rm: cannot remove '/etc/nginx/sites-available/*': No such file or directory
+rm: cannot remove '/etc/nginx/sites-enabled/*~': No such file or directory
+sed: can't read /etc/nginx/sites-enabled/default: No such file or directory
+./0-nginx_likes_port_80: line 8: server: command not found
+./0-nginx_likes_port_80: line 9: listen: command not found
+./0-nginx_likes_port_80: line 10: listen: command not found
+./0-nginx_likes_port_80: line 12: root: command not found
+./0-nginx_likes_port_80: line 13: index: command not found
+./0-nginx_likes_port_80: line 15: server_name: command not found
+./0-nginx_likes_port_80: line 17: location: command not found
+./0-nginx_likes_port_80: line 18: try_files: command not found
+./0-nginx_likes_port_80: line 19: syntax error near unexpected token `}'
+./0-nginx_likes_port_80: line 19: `    }'
