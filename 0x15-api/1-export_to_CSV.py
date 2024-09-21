@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-# Us#!/usr/bin/py#!/usr/bin/python3
 '''A script that gathers data from an API and exports it to a CSV file.
 '''
 import re
@@ -29,4 +28,3 @@ if __name__ == '__main__':
                             todo.get('title')
                         )
                     )
-''A script that gathers data from an API and exp
