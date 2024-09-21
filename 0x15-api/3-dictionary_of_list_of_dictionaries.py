@@ -1,33 +1,30 @@
 #!/usr/bin/python3
-# Using what you did in the task #0, extend your Python
-# script to export data in the JSON format.
-
+'''A script that gathers data from an API and exports it to a JSON file.
+'''
 import json
 import requests
-import sys
 
-if __name__ == "__main__":
-    jsonplaceholder = 'https://jsonplaceholder.typicode.com/users'
-    response = requests.get(jsonplaceholder)
-    employees = response.json()
-    print(employees)
-    
-    data_dict = {}
 
-    for employee in employees:
-        USER_ID = employee.get('id')
-        username = employee.get('username')
-        url = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(USER_ID)
-        response = requests.get(url)
-        tasks = response.json()
-        data_dict[USER_ID] = []
-        for task in tasks:
-            data_dict[USER_ID].append({
-                "username": username,
-                "task": task.get("title"),
-                "completed": task.get("completed"),
-            })
+API_URL = 'https://jsonplaceholder.typicode.com'
+'''The API's URL.'''
 
-    # Write the tasks data to a JSON file
-    with open('todo_all_employees.json', 'w') as f:
-        json.dump(data_dict, f)
+
+if __name__ == '__main__':
+    users_res = requests.get('{}/users'.format(API_URL)).json()
+    todos_res = requests.get('{}/todos'.format(API_URL)).json()
+    users_data = {}
+    for user in users_res:
+        id = user.get('id')
+        user_name = user.get('username')
+        todos = list(filter(lambda x: x.get('userId') == id, todos_res))
+        user_data = list(map(
+            lambda x: {
+                'username': user_name,
+                'task': x.get('title'),
+                'completed': x.get('completed')
+            },
+            todos
+        ))
+        users_data['{}'.format(id)] = user_data
+    with open('todo_all_employees.json', 'w') as file:
+        json.dump(users_data, file)
