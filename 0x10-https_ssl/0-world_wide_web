@@ -15,4 +15,7 @@ then
 elif [ "$#" == 2 ]
 then
   dns_config "$1" "$2"
-fi
+else
+	echo "Usage: $0 <domain> [subdomain]
+	exit 1
+  fi
