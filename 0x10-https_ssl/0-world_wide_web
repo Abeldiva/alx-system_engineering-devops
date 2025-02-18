@@ -1,21 +1,37 @@
 #!/usr/bin/env bash
-# write a Bash script that will display information about the subdomains
+# write a Bash script that will display information about the subdomain
 
-dns_config () {
-    script=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
-    echo "$2 $script" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
+get_subdomain_info() {
+    local subdomain=$1
+    local domain=$2
+
+    # Query the DNS record (A record in this case) using dig
+    record=$(dig +short "$subdomain.$domain")
+
+    # Output the result
+    if [ -n "$record" ]; then
+        echo "The subdomain $subdomain is an A record and points to $record"
+    else
+        echo "The subdomain $subdomain does not exist"
+    fi
 }
 
-if [ "$#" == 1 ]
-then
-  dns_config "$1" "www"
-  dns_config "$1" "lb-01"
-  dns_config "$1" "web-01"
-  dns_config "$1" "web-02"
-elif [ "$#" == 2 ]
-then
-  dns_config "$1" "$2"
+# Ensure both domain argument is provided
+if [ -z "$1" ]; then
+    echo "Domain is mandatory"
+    exit 1
+fi
+
+# Main domain and optional subdomain
+domain=$1
+subdomain=$2
+
+# Display for individual subdomain if provided
+if [ -n "$subdomain" ]; then
+    get_subdomain_info "$subdomain" "$domain"
 else
-	echo "Usage: $0 <domain> [subdomain]
-	exit 1
-  fi
+    # If no subdomain is provided, display for predefined subdomains
+    for sub in "www" "lb-01" "web-01" "web-02"; do
+        get_subdomain_info "$sub" "$domain"
+    done
+fi
